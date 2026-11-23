@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem; /* room for the sticky header when jumping to #sections */
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    font-size: 1.0625rem; /* 17px — comfortable for reading on a phone */
+    line-height: 1.6;
+  }
+  h1, h2, h3 {
+    font-family: theme('fontFamily.display');
+    color: theme('colors.ink.DEFAULT');
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+
+  /* One clear, visible focus style everywhere */
+  :focus-visible {
+    outline: 3px solid theme('colors.mint.600');
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .container-page { @apply mx-auto w-full max-w-6xl px-5 sm:px-8; }
+
+  .section { @apply py-16 sm:py-24; }
+
+  .h2 { @apply text-[2rem] font-semibold leading-[1.1] sm:text-[2.75rem]; }
+  .lede { @apply mt-4 max-w-prose text-lg text-ink-soft; }
+
+  .btn {
+    @apply inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full px-6 py-3
+           text-base font-bold transition-colors duration-150;
+  }
+  .btn-primary { @apply btn bg-mint-700 text-white hover:bg-mint-800; }
+  .btn-secondary { @apply btn border-2 border-mint-700 bg-white text-mint-800 hover:bg-mint-50; }
+
+  .field-label { @apply mb-1.5 block text-[0.95rem] font-bold text-ink; }
+  .field-input {
+    @apply block min-h-[48px] w-full rounded-xl border border-mist-line bg-white px-4 py-3 text-base text-ink
+           placeholder:text-ink-muted focus:border-mint-600 focus:outline-none focus:ring-2 focus:ring-mint-300;
+  }
+
+  /* Placeholder text that MUST be replaced before launch — styled so it's hard to miss */
+  .placeholder-tag { @apply rounded bg-amber-50 px-1.5 py-0.5 text-amber-900 ring-1 ring-amber-200; }
+}
